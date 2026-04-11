@@ -56,10 +56,7 @@ Evaluation Metrics
 
 ## 📸 Output Screenshot
 
-
-```
-![Output](screenshot.png)
-```
+![GUI](screenshot.png)
 
 ---
 
