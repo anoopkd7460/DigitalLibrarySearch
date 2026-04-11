@@ -56,7 +56,6 @@ Evaluation Metrics
 
 ## 📸 Output Screenshot
 
-> Add your GUI screenshot here
 
 ```
 ![Output](screenshot.png)
