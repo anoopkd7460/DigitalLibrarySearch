@@ -31,7 +31,7 @@ def start_app():
                        create_row(d, s))
 
         # Evaluation after results
-        relevant = ["machine learning basics"]
+        relevant = filtered
 
         precision, recall, f1 = evaluate(
             [doc for doc, _ in ranked],
