@@ -9,14 +9,23 @@ def preprocess(text):
 def boolean_search(query, docs):
     query = query.lower()
 
-    if " and " in query:
+    # ---- Detect query type ----
+    if query.startswith("not "):
+        # Case: NOT banana
+        exclude_terms = preprocess(query[4:])
+        operator = "not_only"
+
+    elif " and " in query:
         terms = [t.strip() for t in query.split(" and ")]
         operator = "and"
     elif " or " in query:
         terms = [t.strip() for t in query.split(" or ")]
         operator = "or"
     elif " not " in query:
-        terms = [t.strip() for t in query.split(" not ")]
+        # Case: apple NOT banana
+        include_part, exclude_part = query.split(" not ", 1)
+        include_terms = preprocess(include_part)
+        exclude_terms = preprocess(exclude_part)
         operator = "not"
     else:
         terms = preprocess(query)   
@@ -42,7 +51,14 @@ def boolean_search(query, docs):
                 results.append(doc)
 
         elif operator == "not":
-            if not any(term in words for term in terms):
+            # A NOT B  → include A, exclude B
+            if (all(term in words for term in include_terms) 
+            and not any(term in words for term in exclude_terms)):
+                results.append(doc)
+
+        elif operator == "not_only":
+            # NOT B → exclude B
+            if not any(term in words for term in exclude_terms):
                 results.append(doc)
 
         else:
