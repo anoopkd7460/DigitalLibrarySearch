@@ -64,7 +64,7 @@ def start_app():
 
         # Score 
         tk.Label(row,
-                 text=f"{score[0]:.4f}",
+                 text=f"{score:.4f}",
                  font=("Segoe UI", 10, "bold"),
                  bg="white", fg="#27ae60",
                  anchor="e").pack(side="right", padx=10)
